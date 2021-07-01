@@ -22,10 +22,12 @@ class PostController extends Controller
     }
 
     function create(){
+        $this->authorize('create', Post::class);
         return view('models.posts.form');
     }
 
     function store(){
+        $this->authorize('create', Post::class);
         $data = request()->validate($this->rules());
 
         $post = auth()->user()
@@ -42,12 +44,14 @@ class PostController extends Controller
     }
 
     function edit(Post $post){
+        $this->authorize('update', $post);
         return view('models.posts.form', [
             'post' => $post
         ]);
     }
 
     function update(Post $post){
+        $this->authorize('update', $post);
         $data = \request()->validate($this->rules($post));
 
         $post->update($data);
@@ -55,6 +59,7 @@ class PostController extends Controller
     }
 
     function destroy(Post $post){
+        $this->authorize('delete', Post::class);
         $post->delete();
         return redirect()->route('posts.index');
     }

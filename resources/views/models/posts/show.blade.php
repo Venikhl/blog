@@ -17,6 +17,8 @@
     </p>
     @can('update', $post)
         <a href="{{route('posts.edit', $post)}}">Изменить</a>
+    @endcan
+    @can('delete', $post)
         <form action="{{route('posts.destroy', $post)}}" method="post">
             @csrf
             @method('delete')
