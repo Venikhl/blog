@@ -14,6 +14,7 @@ class PostController extends Controller
     function index(){
         $posts = Post::query()
             ->latest()
+            ->with('user')
             ->get();
         return view('models.posts.index', [
             'posts' => $posts

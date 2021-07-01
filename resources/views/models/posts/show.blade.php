@@ -6,19 +6,22 @@
     <div>
         <small>
             Создано: {{$post->created_at}}
+        </small><br />
+        <small>
+            Автор: {{$post->user->name}}
         </small>
     </div>
 
     <p>
         {{$post->content}}
     </p>
-    @if(auth()->check())
+    @can('update', $post)
         <a href="{{route('posts.edit', $post)}}">Изменить</a>
         <form action="{{route('posts.destroy', $post)}}" method="post">
             @csrf
             @method('delete')
             <button>Удалить</button>
         </form>
-    @endif
+    @endcan
 
 @endsection

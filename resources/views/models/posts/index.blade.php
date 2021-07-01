@@ -3,9 +3,9 @@
 @section('content')
 <h1>Посты</h1>
 
-@if(auth()->check())
+@can('create', App\Models\Post::class)
     <a href="{{route('posts.create')}}">Добавить пост</a>
-@endif
+@endcan
 
 <hr>
 
@@ -15,7 +15,10 @@
             <li value="{{$post->id}}">
                 <a href="{{route('posts.show', $post)}}">
                     {{$post->title}}
-                </a>
+                </a>,
+                <small>
+                    {{$post->user->name}}
+                </small>
             </li>
         @endforeach
     </ol>
