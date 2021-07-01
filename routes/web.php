@@ -28,7 +28,7 @@ use \App\Http\Controllers\PostController;
 //    return "<h1>ID => {$id}</h1>";
 //})->where('id', '[0-9]+');
 
-Route::get('/', [HomeController::class, 'index'])
+Route::redirect('/', 'posts')
     ->name('index');
 
 Route::get('posts', [PostController::class, 'index'])
@@ -51,3 +51,14 @@ Route::put('posts/{post}', [PostController::class, 'update'])
 
 Route::delete('posts/{post}', [PostController::class, 'destroy'])
     ->name('posts.delete');
+
+Route::get('secret', function (){
+    return 'top secret INFO!';
+})->middleware('auth');
+
+Route::resource('posts', PostController::class)
+    ->except('index', 'show')
+    ->middleware('auth');
+
+Route::resource('posts', PostController::class)
+    ->only('index', 'show');

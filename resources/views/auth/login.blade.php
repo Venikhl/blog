@@ -1,4 +1,7 @@
-<h1>Войти</h1>
+@extends('layouts.main')
+
+@section('content')
+    <h1>Войти</h1>
 
 @if(\Route::has('register'))
     <a href="{{route('register')}}">Регистрация</a>
@@ -10,7 +13,7 @@
     <div>
         <label for="email">Email</label>
     </div>
-    <input type="email" name="email" id="email" required autofocus />
+    <input value="{{old('email')}}" type="email" name="email" id="email" required autofocus />
     @error('email')
     <span>{{$message}}</span>
     @enderror
@@ -24,6 +27,15 @@
     @enderror
 
     <div>
+        <label for="remember">
+            <input {{old('remember') ? 'checked' : ''}} type="checkbox" id="remember" name="remember" />
+            Запомнить
+        </label>
+    </div>
+
+    <div>
         <button>Войти</button>
     </div>
 </form>
+
+@endsection

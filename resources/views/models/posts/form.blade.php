@@ -1,6 +1,10 @@
 <?php
 $post = $post ?? null;
 ?>
+
+@extends('layouts.main')
+
+@section('content')
 <h1>@if($post) Редактировать пост @else Новый пост @endif</h1>
 
 <form action="{{$post ? route('posts.update', $post) : route('posts.store')}}" method="post">
@@ -30,3 +34,5 @@ $post = $post ?? null;
     </div>
     <button>@if($post) Редактировать пост @else Создать пост @endif</button>
 </form>
+
+@endsection

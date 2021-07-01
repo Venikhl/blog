@@ -26,7 +26,9 @@ class PostController extends Controller
 
     function store(){
         $data = request()->validate($this->rules());
-        $post = Post::query()
+
+        $post = auth()->user()
+            ->posts()
             ->create($data);
         return redirect()->route('posts.show', $post);
     }
@@ -53,7 +55,7 @@ class PostController extends Controller
 
     function destroy(Post $post){
         $post->delete();
-        return redirect()->route('post.index');
+        return redirect()->route('posts.index');
     }
 
     protected function rules(Post $post = null): array{

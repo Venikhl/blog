@@ -1,5 +1,11 @@
+@extends('layouts.main')
+
+@section('content')
 <h1>Посты</h1>
-<a href="{{route('post.create')}}">Добавить пост</a>
+
+@if(auth()->check())
+    <a href="{{route('posts.create')}}">Добавить пост</a>
+@endif
 
 <hr>
 
@@ -18,3 +24,4 @@
         Постов нет! Приходите завтра! :)
     </div>
 @endif
+@endsection
