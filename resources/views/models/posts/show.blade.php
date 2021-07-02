@@ -46,31 +46,47 @@
     @endcan
 
     @forelse($post->comments as $comment)
-        <div>
-            <div>
-                <small>
+        <p>
+            <small>
+                <span>
                     @if($comment->user)
-                    {{$comment->user->name}}
+                        {{$comment->user->name}}
                     @else
-                    DELETED
+                        DELETED
                     @endif
-                </small>
-            </div>
-            <p>
+                </span>
+                @can('delete', $comment)
+                    <a href="#" class="delete-comment-link" data-form-id="delete-comment-{{$comment->id}}">Удалить</a>
+                @endcan
+            </small>
+            <br>
+            <span>
                 {{$comment->content}}
-            </p>
-            @can('delete', $comment)
-            <form action="{{route('comments.destroy', $comment)}}" method="post">
+            </span>
+        </p>
+        @can('delete', $comment)
+            <form id="delete-comment-{{$comment->id}}" action="{{route('comments.destroy', $comment)}}" method="post">
                 @csrf
                 @method('delete')
-                <button>Удалить</button>
             </form>
-            @endcan
-        </div>
+        @endcan
     @empty
     <div>
         Комментариев пока нет!
     </div>
     @endforelse
-
+    <script>
+        let links = document.querySelectorAll('.delete-comment-link');
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                let id = link.dataset.formId;
+                if(id){
+                    let form = document.getElementById(id);
+                    if(form)
+                        form.submit();
+                }
+            });
+        });
+    </script>
 @endsection

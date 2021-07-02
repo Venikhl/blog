@@ -16,10 +16,17 @@ class CommentController extends Controller
 
     function store(CommentRequest $request, Post $post)
     {
-        $comment = $post->comments()
-            ->create($request->validated());
+//        $comment = $post->comments()
+//            ->create($request->validated());
+//
+//        $comment->user()
+//            ->associate(auth()->user())
+//            ->save();
 
-        $comment->user()->associate(auth()->user())->save();
+        $comment = new Comment($request->validated());
+        $comment->post()->associate($post);
+        $comment->user()->associate(auth()->user());
+        $comment->save();
         return back();
     }
 
