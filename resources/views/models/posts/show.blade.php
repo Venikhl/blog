@@ -46,7 +46,27 @@
     @endcan
 
     @forelse($post->comments as $comment)
-
+        <div>
+            <div>
+                <small>
+                    @if($comment->user)
+                    {{$comment->user->name}}
+                    @else
+                    DELETED
+                    @endif
+                </small>
+            </div>
+            <p>
+                {{$comment->content}}
+            </p>
+            @can('delete', $comment)
+            <form action="{{route('comments.destroy', $comment)}}" method="post">
+                @csrf
+                @method('delete')
+                <button>Удалить</button>
+            </form>
+            @endcan
+        </div>
     @empty
     <div>
         Комментариев пока нет!

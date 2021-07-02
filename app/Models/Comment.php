@@ -11,6 +11,10 @@ class Comment extends Model
         'content'
     ];
 
+    protected $with = [
+        'user'
+    ];
+
     function user(){
         return $this->belongsTo(User::class);
     }

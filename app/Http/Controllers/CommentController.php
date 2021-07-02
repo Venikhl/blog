@@ -9,12 +9,17 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Comment::class, 'comment');
+    }
+
     function store(CommentRequest $request, Post $post)
     {
         $comment = $post->comments()
             ->create($request->validated());
 
-        $comment->user()->associate(auth()->user());
+        $comment->user()->associate(auth()->user())->save();
         return back();
     }
 
