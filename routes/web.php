@@ -3,6 +3,7 @@
 use \App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostController;
+use \App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,16 @@ Route::resource('posts', PostController::class)
 
 Route::resource('posts', PostController::class)
     ->only('index', 'show');
+
+Route::prefix('posts/{post}')
+    ->middleware('auth')
+    ->group(function (){
+
+        Route::resource('comments', CommentController::class)
+            ->only('store');
+
+    });
+
+Route::resource('comments', CommentController::class)
+    ->middleware('auth')
+    ->only('destroy');

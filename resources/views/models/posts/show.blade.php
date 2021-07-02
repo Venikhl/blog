@@ -26,4 +26,31 @@
         </form>
     @endcan
 
+    <hr>
+
+    <h3>Комментарии</h3>
+
+    @can('create', \App\Models\Comment::class)
+    <form action="{{route('comments.store', $post)}}" method="post">
+        @csrf
+
+        <textarea name="content">{{old('content')}}</textarea>
+        @error('content')
+        <span>{{$message}}</span>
+        @enderror
+
+        <div>
+            <button>Добавить</button>
+        </div>
+    </form>
+    @endcan
+
+    @forelse($post->comments as $comment)
+
+    @empty
+    <div>
+        Комментариев пока нет!
+    </div>
+    @endforelse
+
 @endsection
