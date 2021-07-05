@@ -66,7 +66,7 @@ Route::resource('posts', PostController::class)
     ->only('index', 'show');
 
 Route::prefix('posts/{post}')
-    ->middleware('auth')
+    ->middleware(['auth', 'verified'])
     ->group(function (){
 
         Route::resource('comments', CommentController::class)
@@ -75,7 +75,7 @@ Route::prefix('posts/{post}')
     });
 
 Route::resource('comments', CommentController::class)
-    ->middleware('auth')
+    ->middleware(['auth', 'verified'])
     ->only('destroy');
 
 Route::resource('users', UserController::class)
