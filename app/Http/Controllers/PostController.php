@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
@@ -69,6 +70,8 @@ class PostController extends Controller
     }
 
     function destroy(Post $post){
+        $this->removeImage($post);
+
         $post->delete();
         return redirect()->route('posts.index');
     }
@@ -84,8 +87,17 @@ class PostController extends Controller
                 'image' => 'Sorry, server error. Cannot upload image'
             ]);
 
+        $this->removeImage($post);
+
         $post->fill([
             'image_path' => $path
         ])->save();
+    }
+
+    function removeImage(Post $post){
+        if(!$post->image_path)
+            return;
+
+        Storage::delete($post->image_path);
     }
 }
