@@ -16,7 +16,7 @@
 
     @auth
         <div style="display: flex">
-            {{auth()->user()->name}}
+            <a href="{{route('users.show', auth()->user())}}">{{auth()->user()->name}}</a>
         </div>
         <form action="{{route('logout')}}" method="post">
             @csrf

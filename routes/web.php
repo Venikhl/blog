@@ -4,6 +4,7 @@ use \App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostController;
 use \App\Http\Controllers\CommentController;
+use \App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,6 @@ Route::prefix('posts/{post}')
 Route::resource('comments', CommentController::class)
     ->middleware('auth')
     ->only('destroy');
+
+Route::resource('users', UserController::class)
+    ->only('show');

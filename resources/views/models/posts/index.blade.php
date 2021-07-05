@@ -17,7 +17,9 @@
                     {{$post->title}}
                 </a>,
                 <small>
+                    <a href="{{route('users.show', $post->user)}}">
                     {{$post->user->name}}
+                    </a>
                 </small>
             </li>
         @endforeach

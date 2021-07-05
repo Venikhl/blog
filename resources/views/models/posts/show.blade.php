@@ -8,7 +8,9 @@
             Создано: {{$post->created_at}}
         </small><br />
         <small>
-            Автор: {{$post->user->name}}
+            <a href="{{route('users.show', $post->user)}}">
+                Автор: {{$post->user->name}}
+            </a>
         </small>
     </div>
 
@@ -50,7 +52,9 @@
             <small>
                 <span>
                     @if($comment->user)
-                        {{$comment->user->name}}
+                        <a href="{{route('users.show', $post->user)}}">
+                            {{$comment->user->name}}
+                        </a>
                     @else
                         DELETED
                     @endif
