@@ -7,7 +7,7 @@ $post = $post ?? null;
 @section('content')
 <h1>@if($post) Редактировать пост @else Новый пост @endif</h1>
 
-<form action="{{$post ? route('posts.update', $post) : route('posts.store')}}" method="post">
+<form enctype="multipart/form-data" action="{{$post ? route('posts.update', $post) : route('posts.store')}}" method="post">
     @csrf
     @if($post)
         @method('put')
@@ -23,6 +23,17 @@ $post = $post ?? null;
         <span>{{$message}}</span>
         @enderror
     </div>
+
+    <div>
+        <label for="image">Картинка поста</label>
+    </div>
+    <div>
+        <input type="file" name="image" id="image" accept="image/*" />
+        @error('image')
+        <span>{{$message}}</span>
+        @enderror
+    </div>
+
     <div>
         <label for="content">Пост</label>
     </div>

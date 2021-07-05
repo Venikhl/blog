@@ -14,6 +14,11 @@
         </small>
     </div>
 
+    @if($post->image_path)
+        <p>
+            <img src="{{\Illuminate\Support\Facades\Storage::url($post->image_path)}}" height="100" alt="">
+        </p>
+    @endif
     <p>
         {{$post->content}}
     </p>

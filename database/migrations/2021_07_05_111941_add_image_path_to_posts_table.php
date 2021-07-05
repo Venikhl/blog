@@ -12,7 +12,7 @@ class AddImagePathToPostsTable extends Migration
             $table->string('image_path')
                 ->nullable()
                 ->default(null)
-                ->after('is_admin');
+                ->after('id');
         });
     }
 
