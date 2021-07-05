@@ -65,6 +65,10 @@ Route::resource('posts', PostController::class)
 Route::resource('posts', PostController::class)
     ->only('index', 'show');
 
+Route::delete('posts/{post}/image', [PostController::class, 'deleteImage'])
+    ->middleware('auth')
+    ->name('posts.deleteImage');
+
 Route::prefix('posts/{post}')
     ->middleware(['auth', 'verified'])
     ->group(function (){

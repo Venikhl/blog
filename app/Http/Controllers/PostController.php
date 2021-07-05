@@ -76,6 +76,17 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    function deleteImage(Post $post){
+        $this->authorize('update', $post);
+
+        $this->removeImage($post);
+        $post->update([
+            'image_path' => null
+        ]);
+
+        return back();
+    }
+
     function uploadImage(Post $post, PostRequest $request){
         if(!$request->hasFile('image'))
             return;

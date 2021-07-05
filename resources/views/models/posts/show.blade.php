@@ -18,6 +18,12 @@
         <p>
             <img src="{{\Illuminate\Support\Facades\Storage::url($post->image_path)}}" height="100" alt="">
         </p>
+        @can('update', $post)
+            <form action="{{route('posts.deleteImage', $post)}}" method="post">
+                @csrf @method('delete')
+                <button>Удалить картинку</button>
+            </form>
+        @endcan
     @endif
     <p>
         {{$post->content}}
