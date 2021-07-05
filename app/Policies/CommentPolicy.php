@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class CommentPolicy
 {
+    use HandlesAuthorization;
+
     public function create(User $user)
     {
-        return true;
+        return $user->hasVerifiedEmail();
     }
 
     public function delete(User $user, Comment $comment)

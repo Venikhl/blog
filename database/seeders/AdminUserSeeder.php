@@ -17,5 +17,7 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('admin'),
                 'is_admin' => true
             ]);
+
+        $user->markEmailAsVerified();
     }
 }

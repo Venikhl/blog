@@ -45,6 +45,9 @@
             <button>Добавить</button>
         </div>
     </form>
+    @else
+        Вы не подвтвердили свою почту! <br>
+        <a href="{{route('verification.notice')}}">Подтвердить</a>
     @endcan
 
     @forelse($post->comments as $comment)
