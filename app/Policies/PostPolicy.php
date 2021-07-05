@@ -12,7 +12,7 @@ class PostPolicy
 
     public function create(User $user)
     {
-        return true;
+        return $user->is_admin;
     }
 
     public function update(User $user, Post $post)
