@@ -15,6 +15,6 @@ class Post extends Model
     }
 
     function comments(){
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest();
     }
 }
