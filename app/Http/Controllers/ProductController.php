@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, 'product',[
+            'except' => ['index', 'show']
+        ]);
+    }
+
     function index(){
         $products = Product::query()
             ->latest()

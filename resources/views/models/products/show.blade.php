@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+    <hr>
     <h1>{{$products->name}}</h1>
     <a href="{{route('products.index')}}">Все продукты</a>
     <div>
@@ -16,11 +17,11 @@
         <a href="{{route('products.edit', $products)}}">Изменить</a>
     @endcan
     @can('delete', $products)
-        <form action="{{route('products.delete', $products)}}" method="post">
+        <form action="{{route('products.destroy', $products)}}" method="post">
             @csrf
             @method('delete')
             <button>Удалить</button>
         </form>
     @endcan
 
-    <hr>
+@endsection

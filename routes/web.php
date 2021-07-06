@@ -106,3 +106,10 @@ Route::put('products/{product}', [ProductController::class, 'update'])
 
 Route::delete('products/{product}', [ProductController::class, 'destroy'])
     ->name('products.delete');
+
+Route::resource('products', ProductController::class)
+    ->except('index', 'show')
+    ->middleware('auth');
+
+Route::resource('products', ProductController::class)
+    ->only('index', 'show');
