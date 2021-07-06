@@ -1,6 +1,7 @@
 <?php
 
 use \App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\PostController;
 use \App\Http\Controllers\CommentController;
@@ -54,9 +55,9 @@ Route::put('posts/{post}', [PostController::class, 'update'])
 Route::delete('posts/{post}', [PostController::class, 'destroy'])
     ->name('posts.delete');
 
-Route::get('secret', function (){
-    return 'top secret INFO!';
-})->middleware('auth');
+//Route::get('secret', function (){
+//    return 'top secret INFO!';
+//})->middleware('auth');
 
 Route::resource('posts', PostController::class)
     ->except('index', 'show')
@@ -84,3 +85,24 @@ Route::resource('comments', CommentController::class)
 
 Route::resource('users', UserController::class)
     ->only('show');
+
+Route::get('products', [ProductController::class, 'index'])
+    ->name('products.index');
+
+Route::get('products/create', [ProductController::class, 'create'])
+    ->name('products.create');
+
+Route::post('products', [ProductController::class, 'store'])
+    ->name('products.store');
+
+Route::get('products/{product}', [ProductController::class, 'show'])
+    ->name('products.show');
+
+Route::get('products/{product}/edit', [ProductController::class, 'edit'])
+    ->name('products.edit');
+
+Route::put('products/{product}', [ProductController::class, 'update'])
+    ->name('products.update');
+
+Route::delete('products/{product}', [ProductController::class, 'destroy'])
+    ->name('products.delete');
